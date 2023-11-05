@@ -1,0 +1,53 @@
+body{
+    margin: 0px;
+    padding: 10px;
+    min-width: 400pxf;
+    
+}
+/*INPUT FIELD*/
+#input-el{
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid green;
+}
+/*SAVE BUTTON*/
+
+#input-btn{
+    background-color: green;
+    border: none;
+    padding: 12px 30px;
+    color: white;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: large;
+
+}
+
+#input-btn:hover{
+    background-color: rgb(53, 130, 53);
+    transition: 0.15s;
+    cursor: pointer;
+}
+
+#input-btn:active{
+    background-color: rgb(12, 59, 12);
+}
+
+/*LINK/ELEMENT SECTION*/
+ul{
+    color: green;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+li{
+    color: green;
+    margin-top: 5px;
+}
+
+li a{
+    color: green;
+}
