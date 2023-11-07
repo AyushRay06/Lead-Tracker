@@ -1,61 +1,47 @@
-//INPUT BUTTON// && Display f elements
 let myLeads = []
-let inputBtn= document.getElementById("input-btn")
-let deleteBtn = document.getElementById("delete-btn")
-let saveBtm = document.getElementById("save-btn")
-const  inputEl = document.getElementById("input-el")
+const inputEl = document.getElementById("input-el")
+const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
-let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
+const deleteBtn = document.getElementById("delete-btn")
+const leadsFromLocalStorage = JSON.parse( localStorage.getItem("myLeads") )
+const tabBtn = document.getElementById("tab-btn")
 
-if(leadsFromLocalStorage){
+if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage
     render(myLeads)
 }
 
-function render(leads){
-    let listItem =""
-    for(i = 0; i < leads.length;i++){
-        listItem += `
-                    <li>
-                        <a targe='_blank' href='
-                        ${leads[i]}'>${leads[i]}
-                        </a>
-                    </li>
-                    `
+tabBtn.addEventListener("click", function(){    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        myLeads.push(tabs[0].url)
+        localStorage.setItem("myLeads", JSON.stringify(myLeads) )
+        render(myLeads)
+    })
+})
+
+function render(leads) {
+    let listItems = ""
+    for (let i = 0; i < leads.length; i++) {
+        listItems += `
+            <li>
+                <a target='_blank' href='${leads[i]}'>
+                    ${leads[i]}
+                </a>
+            </li>
+        `
     }
-    
-    ulEl.innerHTML = listItem 
+    ulEl.innerHTML = listItems
 }
 
-const tabs =[
-    {url: "aaaaaaaaaaaaaaaa"}
-]
-
-/*SAVE TAB BUTTON */
-saveBtm.addEventListener("click",function(){
-    let xyz = tabs[0].url
-    console.log(xyz)
-})
-
-
-/*DELETE BUTTON*/
-deleteBtn.addEventListener("dblclick",function(){
+deleteBtn.addEventListener("dblclick", function() {
     localStorage.clear()
     myLeads = []
-    render(myLeads);
+    render(myLeads)
 })
 
-/*SAVE INPUT BUTTON*/
-inputBtn.addEventListener("click", function(){
+inputBtn.addEventListener("click", function() {
     myLeads.push(inputEl.value)
     inputEl.value = ""
-    localStorage.setItem("myLeads", JSON.stringify(myLeads))
-    render(myLeads);
-    console.log(localStorage.getItem("myLeads"))
+    localStorage.setItem("myLeads", JSON.stringify(myLeads) )
+    render(myLeads)
 })
-console.log("leadsFromLocalStorage")
-
-
-
-
-
